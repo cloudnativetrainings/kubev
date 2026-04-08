@@ -1,0 +1,11 @@
+.DS_Store
+.secrets/
+kubeone_*
+tf_infra
+*.tar.gz
+*kubeconfig
+CLAUDE.md
+bin/
+charts/
+**-linux-amd64**
+.claude/

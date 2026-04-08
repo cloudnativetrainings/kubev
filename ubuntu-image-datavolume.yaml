@@ -1,0 +1,17 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: ubuntu-image
+  namespace: default
+spec:
+  source:
+    http:
+      url: "https://cloud-images.ubuntu.com/minimal/releases/noble/release/ubuntu-24.04-minimal-cloudimg-amd64.img"
+  pvc:
+    accessModes:
+      - ReadWriteOnce
+    volumeMode: Block
+    storageClassName: longhorn
+    resources:
+      requests:
+        storage: 10Gi

@@ -1,0 +1,27 @@
+
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: vpc-vms
+  namespace: metallb-system
+spec:
+  addresses:
+    # This is a range of IP addresses from your external network that MetalLB can use.
+    # Make sure this range is reserved for MetalLB and does not conflict with other devices.
+    - 192.168.99.100/32
+    - 192.168.99.101/32
+    - 192.168.99.102/32
+    - 192.168.99.103/32
+    - 192.168.99.104/32
+
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: vpc-vms-advertisement
+  namespace: metallb-system
+spec:
+  # This tells MetalLB to advertise the IPs from the pool we just created
+  # using L2 (ARP). This is simpler for a single-subnet setup.
+  ipAddressPools:
+    - vpc-vms

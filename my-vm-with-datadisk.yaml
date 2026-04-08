@@ -1,0 +1,86 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: my-ubuntu-vm
+spec:
+  runStrategy: RerunOnFailure
+  template:
+    metadata:
+      labels:
+        vm: my-ubuntu-vm
+      annotations:
+        kubevirt.io/allow-pod-bridge-network-live-migration: "true"
+        # TODO explain
+    spec:
+      domain:
+        cpu:
+          cores: 2
+        memory:
+          guest: 2Gi
+        devices:
+          disks:
+            - name: rootdisk
+              disk:
+                bus: virtio
+            - name: cloudinit
+              disk:
+                bus: virtio
+            - name: datadisk        # neu
+              disk:
+                bus: virtio
+          interfaces:
+            - name: default
+              bridge: {}
+      volumes:
+        - name: rootdisk
+          dataVolume:
+            name: root-volume
+        - name: datadisk          # neu
+          dataVolume:
+            name: data-volume            
+        - name: cloudinit
+          cloudInitNoCloud:
+            userData: |
+              #cloud-config
+              disable_root: false
+              chpasswd:
+                list: |
+                  root:chang3Me#
+                expire: false
+              users:
+                - name: root
+                  lock_passwd: false
+                  ssh_authorized_keys:
+                    - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDOdEVsuwLfmQZstIOvvV/6K8iIesgjzAgV1JDWZMYkRLaUeyFSPai1s++PR5h/QJU7rqjErnmvOGYWD+tCg4eO2eX5z4DKuJ2Cv/V9gvm2V8VRAlCZ5rKZtitqikzjnk6aGa16xRsk4XorvMnTkXqOAuQW/yJ8GraEAOjBMe8hWCj1AlK6ASS2p2HlMzGYuzIVXlI++S3/pUNvbSXFxFyQLUFZ08qPwDP0phTSkmiMjiTMzX5c/BNKOio5nUVlWBaggbrJMM89DuoaaBB0T5CR07r8AN0WyTCb23Wt5JalOwu+Bj7rR+fEMb6B94qn7/CFGZhDf9TyQFaC+P1G+YFnr9ZjmtoRhhrkxuRZyUTPU0Fq2Kiv4jEwBzkMkFVcCXsHNKuCbW+QTThwdY3cIynREcOiap17y3E+xQ1O34Fe9bZ60Wk1kAuBQrLnzVuPl3xo5FL/ldK4+ClfIrXFyiIbvc16sR//A1m6DxFT3tMu1NieTxUCqBLE/KYwwjAO/ohhIIk8BHs//kxU7YUajv7yhmSJpn5JH6kkTXVJYwdrRB0Ef7yohLjlHnJqkzsaL4RkSsLjLE1BD3K5YeZauiSIdB1hFRwOcqclROJLflZXoJw0GRaIgjH0+jIEhVb89ndQ5uL6lzpVW68js36jJXdvhRkb2617Hr8DSofYY5leqQ== hubert@Mac.localdomain
+      networks:
+        - name: default
+          pod: {}
+  dataVolumeTemplates:
+    - metadata:
+        name: root-volume
+      spec:
+        source:
+          pvc:
+            namespace: default
+            name: ubuntu-image
+        pvc:
+          accessModes:
+            - ReadWriteOnce
+          volumeMode: Block
+          storageClassName: longhorn
+          resources:
+            requests:
+              storage: 10Gi
+    - metadata:
+        name: data-volume     # neu
+      spec:
+        source:
+          blank: {}           # leere Disk
+        pvc:
+          accessModes:
+            - ReadWriteOnce
+          volumeMode: Block
+          storageClassName: longhorn
+          resources:
+            requests:
+              storage: 20Gi              

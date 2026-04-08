@@ -1,0 +1,106 @@
+FROM ubuntu:24.04
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# hadolint ignore=DL3008
+RUN apt-get update && apt-get install --no-install-recommends -y \
+  curl \
+  wget \
+  git \
+  sudo \
+  ca-certificates \
+  build-essential \
+  tree \
+  vim \
+  unzip \
+  zsh \
+  arping \
+  net-tools \
+  nmap \
+  traceroute \
+  iputils-ping \
+  apache2-utils \
+  openssh-client \
+  netcat-openbsd \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+
+RUN mkdir /training/ \
+  && echo 'export KUBECONFIG=/training/.secrets/kubev-cluster-kubeconfig' >> /root/.trainingrc \
+  && echo 'alias code=code-server' >> /root/.trainingrc 
+
+WORKDIR /training/
+
+ARG K8S_VERSION=1.34.5
+RUN curl -LO https://dl.k8s.io/release/v${K8S_VERSION}/bin/linux/amd64/kubectl \
+  && install -o root -g root -m 0500 kubectl /usr/local/bin/kubectl \
+  && rm kubectl \
+  && echo 'source <(kubectl completion zsh)' >> /root/.trainingrc \
+  && echo "export K8S_VERSION=${K8S_VERSION}" >> /root/.trainingrc
+
+ARG KREW_VERSION=0.5.0
+RUN curl -fsSLO https://github.com/kubernetes-sigs/krew/releases/download/v${KREW_VERSION}/krew-linux_amd64.tar.gz \
+  && mkdir -p /training/krew-linux_amd64 \
+  && tar zxvf /training/krew-linux_amd64.tar.gz -C /training/krew-linux_amd64 \
+  && /training/krew-linux_amd64/krew-linux_amd64 install krew \
+  && echo "export PATH=/root/.krew/bin:${PATH}" >> /root/.trainingrc \
+  && echo "export KREW_VERSION=${KREW_VERSION}" >> /root/.trainingrc  
+
+ARG HELM_VERSION=4.1.3
+RUN curl -LO  https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
+  && tar -zxvf helm-v${HELM_VERSION}-linux-amd64.tar.gz \
+  && install -o root -g root -m 0500 linux-amd64/helm /usr/local/bin/helm \
+  && rm helm-v${HELM_VERSION}-linux-amd64.tar.gz \
+  && rm -rf linux-amd64/ \
+  && echo 'source <(helm completion zsh)' >> /root/.trainingrc  
+
+ARG HELMFILE_VERSION=1.4.3
+RUN curl -LO  https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz \
+  && mkdir helmfile \
+  && tar -zxvf helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz -C helmfile \
+  && install -o root -g root -m 0500 helmfile/helmfile /usr/local/bin/helmfile \
+  && rm helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz \
+  && rm -rf helmfile/ \
+  && echo 'source <(helmfile completion zsh)' >> /root/.trainingrc
+
+ARG VIRTCTL_VERSION=1.5.3
+RUN curl -LO https://github.com/kubevirt/kubevirt/releases/download/v1.5.3/virtctl-v${VIRTCTL_VERSION}-linux-amd64 \
+  && install -o root -g root -m 0500 virtctl-v${VIRTCTL_VERSION}-linux-amd64 /usr/local/bin/virtctl \
+  && rm -f virtctl-v${VIRTCTL_VERSION}-linux-amd64 \
+  && echo 'source <(virtctl completion zsh)' >> /root/.trainingrc
+
+# hadolint ignore=DL3008
+RUN apt-get update && apt-get install --no-install-recommends -y \
+  kubectx \
+  && rm -rf /var/lib/apt/lists/*
+
+# vscode
+COPY ./vscode_settings.json /root/.vscode/User/settings.json
+RUN code-server --install-extension esbenp.prettier-vscode --user-data-dir /root/.vscode \
+  && code-server --install-extension redhat.vscode-yaml --user-data-dir /root/.vscode
+
+# zsh
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended \
+  && git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions /root/.oh-my-zsh/custom/plugins/zsh-autosuggestions \
+  && git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting /root/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting \
+  && sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' /root/.zshrc \
+  && git clone --depth 1 https://github.com/romkatv/powerlevel10k.git /root/.oh-my-zsh/custom/themes/powerlevel10k \
+  && /root/.oh-my-zsh/custom/themes/powerlevel10k/gitstatus/install \
+  && sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' /root/.zshrc \
+  && echo '[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh' >> /root/.zshrc \
+  && chsh -s "$(which zsh)" \
+  && echo 'source /root/.trainingrc' >> /root/.zshrc
+COPY ./.p10k.zsh /root/.p10k.zsh
+
+COPY ./hello.sh /root/hello.sh
+RUN chmod +x /root/hello.sh \
+  && echo 'bash /root/hello.sh' >> /root/.trainingrc 
+
+EXPOSE 8080
+
+ENTRYPOINT ["code-server"]
+
+CMD ["--bind-addr", "0.0.0.0:8080", "--auth", "none", "--user-data-dir", "/root/.vscode", "."]

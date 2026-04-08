@@ -1,0 +1,11 @@
+#cloud-config
+disable_root: false
+chpasswd:
+  list: |
+    root:chang3Me#
+  expire: false
+users:
+  - name: root
+    lock_passwd: false
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCjkxZqHkYSAsYaAAx79vcJsIrVtMT7+/rO6JwcUNV/UE2JdHuHha3DJUcsupwGLW1NQ5vSZ2tuk3GCeVWAK20WmBRXZMJvvnbEgy1THKnaJ23bc0dK64bEFyglIrKIF86q9/U8iw7yAL5Szcydt87kD34jNvPoKUKoooTHs3HUYLfdz8Jv0aGXfZmdSxOeWoypHsCX0Cv6pNCSwk6yhiG+BRSZlHF4wuSLbo0el9yMHnrRfouenvLoWB1C4K3ufrchaKsggkqXj394VYVPqK7maUJ81qNnBfnwqTJYcCAvLh9h3Vq0T4O2nvI3wVi5bMzL13Vu4wWtgqxX8EBMD7Hn

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "╔══════════════════════════════════╗"
+echo "║        KubeVirt Training         ║"
+echo "╚══════════════════════════════════╝"
+echo ""
+echo "tools:"
+echo "  kubectl   $(kubectl version --client --output=yaml 2>/dev/null | grep gitVersion | awk '{print $2}')"
+echo "  krew      $(kubectl krew version 2>/dev/null | grep GitTag | awk '{print $2}')"
+echo "  helm      $(helm version --short 2>/dev/null)"
+echo "  helmfile  $(helmfile version -o=short 2>/dev/null)"
+echo "  kubectx   $(kubectx --version 2>/dev/null)"
+echo "  virtctl   $(virtctl version --client 2>/dev/null | awk -F'"' '{print $2}')"
+echo ""
+echo "kubeconfig: ${KUBECONFIG}"
+echo ""
