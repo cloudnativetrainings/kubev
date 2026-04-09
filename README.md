@@ -9,6 +9,9 @@ ssh -F /Users/hubert/git/cloudnativetrainings_training-infra/terraform/out/kv/ku
 
 # copy the sensitive infos into .secrets folder
 
+# kubevirt binaries and charts
+
+
 # connect to the cp node
 
 # connect to the worker node

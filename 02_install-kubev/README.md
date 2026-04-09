@@ -22,6 +22,8 @@ cp -r /Users/hubert/git/kubermatic_kubermatic-virtualization/bin/kubermatic-virt
 
 # AT vscode
 cp /training/bin/kubermatic-virtualization /usr/local/bin/kubev
+cp /training/kubermatic-virtualization /usr/local/bin/kubev
+chmod +x /usr/local/bin/kubev
 
 kubev version
 

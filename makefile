@@ -20,6 +20,7 @@ run: build
 		-p 8080:8080 \
 		--hostname jumphost \
 		-v $(PWD):/training \
+		-v $(HOME)/.ssh/training-kubev:/training/.secrets \
 		$(IMAGE_NAME):$(IMAGE_TAG)
 
 # TODO compose? healthchecks?		

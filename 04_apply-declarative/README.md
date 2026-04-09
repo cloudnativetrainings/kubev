@@ -4,6 +4,10 @@ bin files
 cluster.yaml
 charts dir
 
+create .secrets dir
+copy files into container
+or mount /root/.ssh/training-kubev to /training/.secrets
+
 # TODO logs /tmp/kubermatic-virtualization.log
 
 ```bash
