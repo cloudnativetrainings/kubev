@@ -15,7 +15,7 @@ build: lint
 
 .PHONY: run
 run: build
-	docker run -it -d --rm \
+	docker run -it -d \
 		--restart=always \
 		-p 8080:8080 \
 		--hostname jumphost \
