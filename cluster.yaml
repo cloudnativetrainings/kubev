@@ -1,23 +1,24 @@
+# https://github.com/kubermatic/community-components/blob/master/examples/kubermatic-virtualization/kubev/kubev.yaml
 apiVersion: virtualization.k8c.io/v1alpha1
 kind: KubeVCluster
 networkConfiguration:
-  dnsServerIP: "8.8.8.8"
-  networkCIDR: "10.156.0.0/16"
-  serviceCIDR: "192.168.0.0/16"
-  gatewayIP: "10.156.0.1"
+  dnsServerIP: "169.254.169.254"
+  networkCIDR: "172.25.0.0/24"
+  gatewayIP: "172.25.0.1"
+  # serviceCIDR: "192.168.0.0/16"
 controlPlane:
-  hosts:
-    - address: "10.156.0.4"
-      sshUsername: "root"
-      sshPrivateKeyFile: "/training/.secrets/ssh-private-key"
-staticWorkers:
   hosts:
     - address: "10.156.0.3"
       sshUsername: "root"
-      sshPrivateKeyFile: "/training/.secrets/ssh-private-key"
+      sshPrivateKeyFile: "/root/.ssh/gcp-kubev"
+staticWorkers:
+  hosts:
+    - address: "10.156.0.2"
+      sshUsername: "root"
+      sshPrivateKeyFile: "/root/.ssh/gcp-kubev"
 loadBalancer:
   metallb:
     # TODO ext ips from gce
-    ipRange: "192.168.99.100-192.168.99.104"
+    ipRange: "10.156.0.200-10.156.0.204"
 storage:
   longhorn: {}

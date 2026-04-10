@@ -1,0 +1,17 @@
+{"caller":"service_controller.go:112","controller":"ServiceReconciler","endpoints":"[]","event":"failed to handle service","level":"error","name":"default/training-application","service":"{\"kind\":\"Service\",\"apiVersion\":\"v1\",\"metadata\":{\"name\":\"training-application\",\"namespace\":\"default\",\"uid\":\"7a2357c7-dc9f-4284-bf5d-d27a755e61ee\",\"resourceVersion\":\"6251\",\"creationTimestamp\":\"2026-04-10T11:20:30Z\",\"annotations\":{\"kubectl.kubernetes.io/last-applied-configuration\":\"{\\\"apiVersion\\\":\\\"v1\\\",\\\"kind\\\":\\\"Service\\\",\\\"metadata\\\":{\\\"annotations\\\":{\\\"metallb.io/address-pool\\\":\\\"vpc-vms\\\"},\\\"name\\\":\\\"training-application\\\",\\\"namespace\\\":\\\"default\\\"},\\\"spec\\\":{\\\"ports\\\":[{\\\"port\\\":80,\\\"targetPort\\\":8080}],\\\"selector\\\":{\\\"app\\\":\\\"training-application\\\"},\\\"type\\\":\\\"LoadBalancer\\\"}}\\n\",\"metallb.io/address-pool\":\"vpc-vms\",\"ovn.kubernetes.io/vpc\":\"ovn-cluster\"},\"managedFields\":[{\"manager\":\"kube-ovn-controller\",\"operation\":\"Update\",\"apiVersion\":\"v1\",\"time\":\"2026-04-10T11:20:30Z\",\"fieldsType\":\"FieldsV1\",\"fieldsV1\":{\"f:metadata\":{\"f:annotations\":{\"f:ovn.kubernetes.io/vpc\":{}}}}},{\"manager\":\"kubectl-client-side-apply\",\"operation\":\"Update\",\"apiVersion\":\"v1\",\"time\":\"2026-04-10T11:20:30Z\",\"fieldsType\":\"FieldsV1\",\"fieldsV1\":{\"f:metadata\":{\"f:annotations\":{\".\":{},\"f:kubectl.kubernetes.io/last-applied-configuration\":{},\"f:metallb.io/address-pool\":{}}},\"f:spec\":{\"f:allocateLoadBalancerNodePorts\":{},\"f:externalTrafficPolicy\":{},\"f:internalTrafficPolicy\":{},\"f:ports\":{\".\":{},\"k:{\\\"port\\\":80,\\\"protocol\\\":\\\"TCP\\\"}\":{\".\":{},\"f:port\":{},\"f:protocol\":{},\"f:targetPort\":{}}},\"f:selector\":{},\"f:sessionAffinity\":{},\"f:type\":{}}}}]},\"spec\":{\"ports\":[{\"protocol\":\"TCP\",\"port\":80,\"targetPort\":8080,\"nodePort\":31710}],\"selector\":{\"app\":\"training-application\"},\"clusterIP\":\"10.98.94.194\",\"clusterIPs\":[\"10.98.94.194\"],\"type\":\"LoadBalancer\",\"sessionAffinity\":\"None\",\"externalTrafficPolicy\":\"Cluster\",\"ipFamilies\":[\"IPv4\"],\"ipFamilyPolicy\":\"SingleStack\",\"allocateLoadBalancerNodePorts\":true,\"internalTrafficPolicy\":\"Cluster\"},\"status\":{\"loadBalancer\":{}}}","ts":"2026-04-10T11:20:30Z"}
+
+
+
+Über die GCP Console oder gcloud:
+
+  # Statische externe IP reservieren
+  gcloud compute addresses create kubev-lb-ip --region europe-west3
+
+  # IP anzeigen
+  gcloud compute addresses describe kubev-lb-ip --region europe-west3
+
+  # Der Instanz zuweisen (access config ersetzen)
+  gcloud compute instances add-access-config INSTANCE_NAME \
+    --access-config-name "External NAT" \
+    --address RESERVED_IP \
+    --zone europe-west3-a

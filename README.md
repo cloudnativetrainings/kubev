@@ -1,23 +1,19 @@
 
+## SSH
+
 ```bash
 
-ssh -F /Users/hubert/git/cloudnativetrainings_training-infra/terraform/out/kv/kubev07/hubert/training-kubev/ssh-config jumphost
+mkdir /training/.secrets/
 
-ssh -F /Users/hubert/git/cloudnativetrainings_training-infra/terraform/out/kv/kubev07/hubert/training-kubev/ssh-config -L 8081:localhost:8080 jumphost
+# drag and drop the sensitive files
 
+mkdir /root/.ssh
+install -m 600 -o root -g root /training/.secrets/gcp-kubev /root/.ssh
+install -m 600 -o root -g root /training/.secrets/gcp-kubev.pub /root/.ssh
+install -m 600 -o root -g root /training/.secrets/gcp-kubev-config /root/.ssh/config
+ls -alh /root/.ssh/
 
-
-# copy the sensitive infos into .secrets folder
-
-# kubevirt binaries and charts
-
-
-# connect to the cp node
-
-# connect to the worker node
-
-
-
-
-
+# verify
+ssh controlplane-node
+ssh worker-node
 ```

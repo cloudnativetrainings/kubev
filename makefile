@@ -22,9 +22,6 @@ run: build
 		-v $(PWD):/training \
 		$(IMAGE_NAME):$(IMAGE_TAG)
 
-
-# 		-v $(HOME)/.ssh/training-kubev:/training/.secrets \
-
 # TODO compose? healthchecks?		
 
 # .PHONY: ssh-controlplane-node

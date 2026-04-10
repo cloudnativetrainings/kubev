@@ -2,8 +2,8 @@
 
 
 kubectl delete vm --all --all-namespaces
-ssh loki 'bash -s' < teardown.sh
-ssh thor 'bash -s' < teardown.sh
+ssh controlplane-node 'bash -s' < teardown.sh
+ssh worker-node 'bash -s' < teardown.sh
 
 rm -f .secrets/*-kubeconfig
 rm -f *-kubeconfig
