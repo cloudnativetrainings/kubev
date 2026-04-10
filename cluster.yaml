@@ -3,16 +3,16 @@ kind: KubeVCluster
 networkConfiguration:
   dnsServerIP: "8.8.8.8"
   networkCIDR: "10.156.0.0/16"
-  serviceCIDR: "10.157.0.0/16"
+  serviceCIDR: "192.168.0.0/16"
   gatewayIP: "10.156.0.1"
 controlPlane:
   hosts:
-    - address: "34.179.224.188"
+    - address: "10.156.0.4"
       sshUsername: "root"
       sshPrivateKeyFile: "/training/.secrets/ssh-private-key"
 staticWorkers:
   hosts:
-    - address: "34.179.222.182"
+    - address: "10.156.0.3"
       sshUsername: "root"
       sshPrivateKeyFile: "/training/.secrets/ssh-private-key"
 loadBalancer:
