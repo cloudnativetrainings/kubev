@@ -2,6 +2,12 @@
 ## import image
 
 ```bash
+
+!!! fix pub keys
+- in user-data.yaml
+- in my-vm.yaml
+- in my-vm-with-datadisk.yaml
+
 # reset vm
 kubectl delete -f /training/ubuntu-image-datavolume.yaml
 kubectl delete pv,pvc --all

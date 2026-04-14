@@ -36,7 +36,7 @@ kubectl get svc my-vm-ssh
 # EXTERNAL-IP zeigt die MetalLB-IP
 
 # Von einem Node aus testen:
-ssh -i .secrets/thor root@192.168.99.27
+ssh -i /root/.ssh/gcp-kubev.pub root@192.168.99.27
 curl http://192.168.100.240
 ```
 
@@ -61,5 +61,5 @@ spec:
 kubectl get svc my-vm-ssh
 
 # SSH von einem Node aus
-ssh -i .secrets/thor ubuntu@192.168.100.24x
+ssh -i /root/.ssh/gcp-kubev.pub ubuntu@192.168.100.24x
 ```

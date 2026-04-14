@@ -7,9 +7,10 @@
 
 virtctl help
 # TODO ssh-keygen -f '/root/.ssh/known_hosts' -R '[localhost]:2222'
-virtctl ssh root@my-ubuntu-vm --identity-file /training/.secrets/thor
+virtctl ssh root@my-ubuntu-vm --identity-file /root/.ssh/gcp-kubev
 hostname
 
+# PASSWORD only as it looks
 virtctl console my-ubuntu-vm
 # TODO erst machbar sobald ein passwort gesetzt wurde
 ```
@@ -24,7 +25,7 @@ kubectl port-forward pod/virt-launcher-my-vm-xqsmx 2222:22
 
 # remove from known hosts
 ssh-keygen -f '/root/.ssh/known_hosts' -R '[localhost]:2222'
-ssh -i .secrets/thor root@localhost -p 2222
+ssh -i /root/.ssh/gcp-kubev.pub root@localhost -p 2222
 hostname
 ```
 
@@ -46,21 +47,23 @@ hostname
   - 192.168.100.89 — IP des virt-launcher Pods im Cluster-Netzwerk
 
   Also: Die VM ist erreichbar unter 10.0.2.2:
-  ssh ubuntu@10.0.2.2 -i /path/to/thor
+  ssh ubuntu@10.0.2.2 -i /path/to/pubkey
 ```
 
 ## via nodeport service
+
+# TODO my-vm fix naming
 
 ```bash
 
 kubectl apply -f /training/my-vm-service.yaml
 kubectl get endpoints
+kubectl get nodes -o wide
+ssh -i /root/.ssh/gcp-kubev root@10.156.0.2 -p 30022
+hostname
 
 # remove from known_hosts
-ssh-keygen -f '/root/.ssh/known_hosts' -R '[192.168.99.27]:30022'
-
-ssh -i .secrets/thor root@192.168.99.27 -p 30022
-hostname
+ssh-keygen -f '/root/.ssh/known_hosts' -R '[172.25.0.77]:30022'
 ```
 
 ### via loadbalancer service created via metallb
@@ -74,7 +77,7 @@ kubectl apply -f my-vm-service.yaml
 
 kubectl get svc
 
-ssh -i .secrets/thor root@192.168.99.100 
+ssh -i /root/.ssh/gcp-kubev root@192.168.99.100 
 hostname
 
 ```

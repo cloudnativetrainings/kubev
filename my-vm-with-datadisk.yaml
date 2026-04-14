@@ -25,7 +25,7 @@ spec:
             - name: cloudinit
               disk:
                 bus: virtio
-            - name: datadisk        # neu
+            - name: datadisk # neu
               disk:
                 bus: virtio
           interfaces:
@@ -35,9 +35,9 @@ spec:
         - name: rootdisk
           dataVolume:
             name: root-volume
-        - name: datadisk          # neu
+        - name: datadisk # neu
           dataVolume:
-            name: data-volume            
+            name: data-volume
         - name: cloudinit
           cloudInitNoCloud:
             userData: |
@@ -66,21 +66,21 @@ spec:
         pvc:
           accessModes:
             - ReadWriteOnce
-          volumeMode: Block
+          volumeMode: Filesystem
           storageClassName: longhorn
           resources:
             requests:
               storage: 10Gi
     - metadata:
-        name: data-volume     # neu
+        name: data-volume # neu
       spec:
         source:
-          blank: {}           # leere Disk
+          blank: {} # leere Disk
         pvc:
           accessModes:
             - ReadWriteOnce
-          volumeMode: Block
+          volumeMode: Filesystem
           storageClassName: longhorn
           resources:
             requests:
-              storage: 20Gi              
+              storage: 1Gi

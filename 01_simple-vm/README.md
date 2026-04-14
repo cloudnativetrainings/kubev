@@ -6,6 +6,7 @@
 ```bash
 
 # ssh worker node
+ssh worker-node 
 
 lscpu | grep Virtualization
 

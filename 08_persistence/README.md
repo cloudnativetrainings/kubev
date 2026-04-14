@@ -24,7 +24,7 @@
       pvc:
         accessModes:
           - ReadWriteOnce
-        volumeMode: Block
+        volumeMode: Filesystem
         storageClassName: longhorn
         resources:
           requests:
@@ -32,6 +32,10 @@
 
 
 ```
+
+# TODO shrink down disk sizes or increase disk size on host
+
+# nope I guess the problem was the same name of the vm
 
 ```bash
 
@@ -45,21 +49,31 @@ kubectl get datavolumes
 virtctl restart my-ubuntu-vm
 
 # check in VM
-ssh -i .secrets/thor root@192.168.99.100 
+kubectl get nodes -o wide
+ssh -i /root/.ssh/gcp-kubev root@10.156.0.2 -p 30022
+hostname
+
 
 lsblk
 mkfs.ext4 /dev/vdc
 
 blkid /dev/vdc
-mkdir /mnt/data
-echo "UUID=b1e62366-366e-4ae0-bcd1-5167702fd4fa /mnt/data ext4 defaults 0 2" >> /etc/fstab
+mkdir -p /mnt/data
+
+mount -t ext4 /dev/vdc /mnt/data 
+lsblk
+
+echo something >> /mnt/data/some.file
+
+# or via /etc/fstab
+echo "UUID=f05887ae-77ad-4518-a36e-f8a5ff836bc4 /mnt/data ext4 defaults 0 2" >> /etc/fstab
 
 systemctl daemon-reload
 mount -a
 
 shutdown -r now
 
-ssh -i .secrets/thor root@192.168.99.100 
+ssh -i /root/.ssh/gcp-kubev.pub root@192.168.99.100 
 
 echo "hello from vm" >> /mnt/data/hello.txt
 cat /mnt/data/hello.txt 
@@ -75,7 +89,7 @@ exit
 kubectl get pvc
 
 
-ssh -i .secrets/thor root@192.168.99.27
+ssh -i /root/.ssh/gcp-kubev.pub root@192.168.99.27
 
 ls -alh /var/lib/longhorn/replicas/pvc-319ed899-1362-4cd5-944a-27df49f953aa-97d3443b
 

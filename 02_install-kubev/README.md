@@ -21,9 +21,12 @@ make kubermatic-virtualization
 cp -r /Users/hubert/git/kubermatic_kubermatic-virtualization/bin/kubermatic-virtualization /Users/hubert/git/cloudnativetrainings_kubev/bin/
 
 # AT vscode
-cp /training/bin/kubermatic-virtualization /usr/local/bin/kubev
-cp /training/kubermatic-virtualization /usr/local/bin/kubev
-chmod +x /usr/local/bin/kubev
+
+install -m 700 -o root -g root /training/kubermatic-virtualization /usr/local/bin/kubev
+
+# cp /training/bin/kubermatic-virtualization /usr/local/bin/kubev
+# cp /training/kubermatic-virtualization /usr/local/bin/kubev
+# chmod +x /usr/local/bin/kubev
 
 kubev version
 

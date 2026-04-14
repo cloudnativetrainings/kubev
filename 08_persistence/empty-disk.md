@@ -47,7 +47,7 @@ dataVolumeTemplates:
       pvc:
         accessModes:
           - ReadWriteOnce
-        volumeMode: Block
+        volumeMode: Filesystem
         storageClassName: longhorn
         resources:
           requests:
