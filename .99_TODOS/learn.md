@@ -1,5 +1,0 @@
-# soeren
-
-macvlan
-bgp
-trunkpod
