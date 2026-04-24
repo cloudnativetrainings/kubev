@@ -6,7 +6,8 @@ metadata:
 spec:
   source:
     http:
-      url: "https://cloud-images.ubuntu.com/minimal/releases/noble/release/ubuntu-24.04-minimal-cloudimg-amd64.img"
+      url: "https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-serve\
+        r-cloudimg-amd64.img"
   pvc:
     accessModes:
       - ReadWriteOnce

@@ -46,7 +46,7 @@ watch -n 1 kubectl get pods,vm,vmi,pv,pvc
 # take a look at the datavolumes
 kubectl get datavolumes
 
-# restart vm - TODO do i need this?
+# adding disks involves restarting the vm
 virtctl restart my-vm
 
 # check in VM
@@ -56,21 +56,14 @@ ssh -i /root/.ssh/gcp-kubev root@<INTERNAL-IP-OF-WORKER-NODE> -p 30022
 # list all block devices on the vm
 lsblk
 
-# note that the new disk is not shown, you need to restart the vm
-exit
-virtctl restart my-vm
-
-# re-connect after the restart is finished
-ssh -i /root/.ssh/gcp-kubev root@<INTERNAL-IP-OF-WORKER-NODE> -p 30022
-
-# now a new block device of type disk exists
-lsblk
-
 # create a new directory
 mkdir -p /mnt/data
 
-# format and mount the new disk
-mount -t ext4 /dev/vdc /mnt/data 
+# format disk
+mkfs.ext4 /dev/vdc
+
+# mount disk
+mount /dev/vdc /mnt/data/
 
 # note for making the mount persistent accross vm restarts you have to adapt /etc/fstab
 
@@ -89,8 +82,7 @@ exit
 kubectl get pvc
 
 # ssh into the worker node
-kubectl get nodes -o wide
-ssh -i /root/.ssh/gcp-kubev root@<FILL-IN-THE-INTERNAL-IP-OF-THE-WORKER-NODE>
+ssh worker-node
 
 # show the content of the pvc directory
 ls -alh /var/lib/longhorn/replicas/<FILL-IN-THE-PVC-NAME>-.../

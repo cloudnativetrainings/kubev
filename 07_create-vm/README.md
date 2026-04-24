@@ -21,6 +21,9 @@ kubectl apply -f /training/my-vm.yaml
 
 # watch the vm being created
 watch -n 1 kubectl get pods,vm,vmi,pv,pvc
+
+# getting the logs of the VM
+kubectl logs virt-launcher-... -c guest-console-log
 ```
 
 > Note: several pods pop up (cdi-upload-tmp-pvc, source, virtlauncher pods) which are creating the VM instance.
@@ -28,9 +31,6 @@ watch -n 1 kubectl get pods,vm,vmi,pv,pvc
 ## Managing running VMs
 
 ```bash
-# getting the logs of the VM
-kubectl logs virt-launcher-... -c guest-console-log
-
 # stop the vm
 kubectl delete vmi my-vm
 

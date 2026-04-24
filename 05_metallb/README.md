@@ -7,6 +7,9 @@ Before we expose VMs to external IP addresses lets try doing this via plain old 
 # verify no ip exists for the training-application
 kubectl get ips | grep training-application 
 
+# verify ipaddresspool was created and the annotation of the service matches the name
+kubectl -n metallb-system get ipaddresspools.metallb.io
+
 # deploy the planing application
 kubectl apply -f /training/training-application.yaml
 
@@ -36,6 +39,10 @@ kubectl delete -f /training/training-application.yaml
 Due to this [issue](https://github.com/kubermatic/kubermatic-virtualization/issues/149) it can happen the ipaddresspool did not get created properly. You may have to create it manually.
 
 ```bash
+
+# TODO soeren...
+kubectl get l2advertisements -A
+kubectl get bgpadvertisements -A
 
 # TODO is this still needed, seems to work now
 

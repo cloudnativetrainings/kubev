@@ -69,8 +69,7 @@ kubectl get endpoints
 kubectl get nodes -o wide
 
 # connect to the vm via the nodeport 30022 on the worker node
-ssh -i /root/.ssh/gcp-kubev root@10.156.0.3 -p 30022
-hostname
+ssh -i /root/.ssh/gcp-kubev root@<FILL-IN-INTERNAL-IP-OF-WORKER-NODE> -p 30022
 
 # printout the hostname of the vm
 hostname

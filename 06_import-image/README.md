@@ -15,4 +15,4 @@ kubectl apply -f /training/ubuntu-image-datavolume.yaml
 watch -n 1 kubectl get pods,datavolume,pv,pvc
 ```
 
-> Note: a pod called importer-prime-... gets started which will download the image and store it into a PV.
+> Note: a pod called importer-prime-... gets started which will download the image and store it into a PV. The VM you will create later needs it for bootstraping.
