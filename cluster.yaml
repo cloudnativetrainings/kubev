@@ -19,6 +19,6 @@ staticWorkers:
 loadBalancer:
   metallb:
     # TODO ext ips from gce
-    ipRange: "10.156.0.200-10.156.0.204"
+    ipRange: "10.156.0.200-10.156.0.255"
 storage:
   longhorn: {}

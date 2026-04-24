@@ -13,7 +13,7 @@ Adapt the VM definition in the file `/training/my-vm.yaml`.
   disk:
     bus: virtio
 
-# spec.template.spec.domain.volumes
+# spec.template.spec.volumes
 - name: datadisk
   dataVolume:
     name: data-volume
