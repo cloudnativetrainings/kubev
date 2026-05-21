@@ -1,7 +1,7 @@
 
 # Persistence
 
-In this lab you will learn how to add an empty disk to you VM.
+In this lab you will learn how to add an empty disk to your VM.
 
 ## Preparations
 

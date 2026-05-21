@@ -1,7 +1,7 @@
 
 # Using MetalLB
 
-Before we expose VMs to external IP addresses lets try doing this via plain old Pods.
+Before we expose VMs to external IP addresses let's try doing this via plain old Pods.
 
 ```bash
 # verify no ip exists for the training-application
@@ -34,9 +34,9 @@ curl http://<EXTERNAL-IP>
 kubectl delete -f /training/training-application.yaml
 ```
 
-## Debugging metallb
+## Debugging MetalLB
 
-Due to this [issue](https://github.com/kubermatic/kubermatic-virtualization/issues/149) it can happen the ipaddresspool did not get created properly. You may have to create it manually.
+Due to this [issue](https://github.com/kubermatic/kubermatic-virtualization/issues/149), the ipaddresspool may not get created properly. You may have to create it manually.
 
 ```bash
 

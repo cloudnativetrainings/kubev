@@ -85,7 +85,7 @@ virsh domifaddr my-vm # to get the ip-address
 ssh -v -i /root/.ssh/gcp-kubev root@<FILL-IN-IP-OF-VM>
 ```
 
-## destroy vm
+## Destroy VM
 
 ```bash
 virsh list --name
@@ -103,7 +103,7 @@ exit
 
 ## Debug VM creation
 
-If you cannot reach the VM after creation you can do the following to get logs of the VM.
+If you cannot reach the VM after creation, you can do the following to get logs of the VM.
 
 ```bash
 # instead of this parameter in virt-install

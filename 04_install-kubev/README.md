@@ -5,11 +5,11 @@ In this lab you will learn how to install KubeV.
 
 ## Preparations
 
-Fill in the internal ip addresses provided in the file `/training/.secrets/README.md` for the control-plane-node and the worker node in the kubev configuration file `/training/cluster.yaml`.
+Fill in the internal IP addresses provided in the file `/training/.secrets/README.md` for the controlplane-node and the worker node in the kubev configuration file `/training/cluster.yaml`.
 
 ## Run the installer
 
-The installer will setup a Kubernetes Cluster via [kubeone](https://github.com/kubermatic/kubeone) and install the kubev components.
+The installer will set up a Kubernetes cluster via [kubeone](https://github.com/kubermatic/kubeone) and install the kubev components.
 
 ```bash
 # trigger the installation
