@@ -51,7 +51,7 @@ virtctl restart my-vm
 
 # check in VM
 kubectl get nodes -o wide
-ssh -i /root/.ssh/gcp-kubev root@<INTERNAL-IP-OF-WORKER-NODE> -p 30022
+ssh -i /root/.ssh/gcp-kubev root@<FILL-IN-INTERNAL-IP-OF-WORKER-NODE> -p 30022
 
 # list all block devices on the vm
 lsblk
@@ -65,7 +65,7 @@ mkfs.ext4 /dev/vdc
 # mount disk
 mount /dev/vdc /mnt/data/
 
-# note for making the mount persistent accross vm restarts you have to adapt /etc/fstab
+# note for making the mount persistent across vm restarts you have to adapt /etc/fstab
 
 # verify
 echo something >> /mnt/data/some.file

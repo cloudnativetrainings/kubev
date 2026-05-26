@@ -1,7 +1,7 @@
 
 # Hello Virtualization
 
-In this lab you will learn how to create, start and use a VM on some Linux Machine.
+In this lab you will learn how to create, start and use a VM on some Linux machine.
 
 ## Preparation steps
 

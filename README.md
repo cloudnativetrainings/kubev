@@ -6,7 +6,7 @@ In this training you will learn how to install and use Kubermatic Virtualization
 
 You should have received sensitive information giving you access to VMs with nested virtualization engaged.
 
-Please ensure you have done the steps as discribed in the `README.md` file you have received.
+Please ensure you have done the steps as described in the `README.md` file you have received.
 
 ## Using the IDE
 

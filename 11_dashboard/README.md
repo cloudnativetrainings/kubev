@@ -1,10 +1,10 @@
-# Installing kubermatic-virtualization-dahboard to your environment
+# Installing kubermatic-virtualization-dashboard to your environment
 
 In this lab you will learn how to install kubermatic-virtualization-dashboard to your environment.
 
 See [documentation](https://docs.kubermatic.com/kubermatic-virtualization/v1.1.0/configuration-guide/#dashboard) for details.
 
-> Note: for the sake of simplicity in the workshop we will make us of basic auth. This allows us not having to care about dex/certmanager/ingress/... This only makes sense in the workshop installation. Do not do this in real installations, due to basic auth is not secure at all!!!
+> Note: for the sake of simplicity in the workshop we will make use of basic auth. This allows us not having to care about dex/certmanager/ingress/... This only makes sense in the workshop installation. Do not do this in real installations, because basic auth is not secure at all.
 
 ## Install the Dashboard
 
@@ -48,7 +48,7 @@ kubectl -n kubermatic-virtualization get svc kubev-dashboard
 # get the external ip of the worker node
 kubectl get nodes -o wide
 
-# get the credenitals
+# get the credentials
 kubectl -n kubermatic-virtualization get secret kubev-basic-auth -o yaml
 
 # the username is `admin`
