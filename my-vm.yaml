@@ -10,7 +10,6 @@ spec:
         vm: my-vm
       annotations:
         kubevirt.io/allow-pod-bridge-network-live-migration: "true"
-        # TODO explain
     spec:
       domain:
         cpu:

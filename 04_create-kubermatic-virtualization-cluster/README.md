@@ -1,7 +1,7 @@
 
-# Install KubeV
+# Create kubermatic-virtualization cluster
 
-In this lab you will learn how to install KubeV.
+In this lab you will learn how to make use of the kubermatic-virtualization-installer to spawn up an k8s cluster and install the needed components, in their proper versions, into the k8s cluster.
 
 ## Preparations
 

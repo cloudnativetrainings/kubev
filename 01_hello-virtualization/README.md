@@ -6,7 +6,7 @@ In this lab you will learn how to create, start and use a VM on some Linux Machi
 ## Preparation steps
 
 ```bash
-# copy the private key to the worker node
+# copy the private key to the worker node (for being able to ssh into the vm we will create)
 scp /training/.secrets/gcp-kubev worker-node:/root/.ssh/
 
 # ssh into the worker node
@@ -41,17 +41,22 @@ ls -alh /etc/libvirt/qemu/
 # download ubuntu image which supports cloud-init
 wget https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-amd64.img
 
+# copy img file to where libvirt expects it
+cp ubuntu-24.04-server-cloudimg-amd64.img /var/lib/libvirt/images/
+
+# change ownership
+chown libvirt-qemu:libvirt-qemu /var/lib/libvirt/images/ubuntu-24.04-server-cloudimg-amd64.img
+
 # create an iso which will allow you to connect to the vm afterwards
 # note you are on the worker node, you have to use vi on the worker node and not the IDE running on the jumphost
 vi user-data.yaml
 cloud-localds seed.iso user-data.yaml
 
-# copy the iso and the image where libvirt expects those files
+# copy img file to where libvirt expects it
 cp seed.iso /var/lib/libvirt/images/
-cp ubuntu-24.04-server-cloudimg-amd64.img /var/lib/libvirt/images/
-chown libvirt-qemu:libvirt-qemu \
-  /var/lib/libvirt/images/seed.iso \
-  /var/lib/libvirt/images/ubuntu-24.04-server-cloudimg-amd64.img
+
+# change ownership
+chown libvirt-qemu:libvirt-qemu /var/lib/libvirt/images/seed.iso
 
 # verify
 ls -alh /var/lib/libvirt/images/
