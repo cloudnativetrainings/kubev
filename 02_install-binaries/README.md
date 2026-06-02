@@ -9,7 +9,7 @@ See [documentation](https://docs.kubermatic.com/kubermatic-virtualization/v1.1.0
 curl -sfL https://raw.githubusercontent.com/kubermatic/kubermatic-ee-downloader/main/install.sh | sh
 ```
 
-After downloading and installing the kubermatic-ee-downloader you have to provide credentials to install the kubermatic-virtualization-installer. For the workshop you will receive a temporary license. Please contact us if you want to get a permanent license.
+After downloading and installing the kubermatic-ee-downloader, you have to provide credentials to install the kubermatic-virtualization-installer. For the workshop you will receive a temporary license. Please contact us if you want to get a permanent license.
 
 ```bash
 # set the quay username

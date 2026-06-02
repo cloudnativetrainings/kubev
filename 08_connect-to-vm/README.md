@@ -13,7 +13,7 @@ virtctl ssh root@my-vm --identity-file /root/.ssh/gcp-kubev
 hostname
 
 # exit the vm
-# note, if that does not work you got a hint how to disconnect 
+# note, if that does not work, you got a hint on how to disconnect 
 exit
 
 # connect via console
@@ -24,7 +24,7 @@ virtctl console my-vm
 hostname
 
 # exit the vm
-# note, if that does not work you got a hint how to disconnect 
+# note, if that does not work, you got a hint on how to disconnect 
 exit
 ```
 
@@ -57,6 +57,6 @@ ssh -i /root/.ssh/gcp-kubev root@<FILL-IN-INTERNAL-IP-OF-WORKER-NODE> -p 30022
 hostname
 
 # exit the vm
-# note, if that does not work you got a hint how to disconnect 
+# note, if that does not work, you got a hint on how to disconnect 
 exit
 ```

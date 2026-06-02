@@ -5,7 +5,7 @@ In this lab you will learn how to make use of the kubermatic-virtualization-inst
 
 ## Preparations
 
-Fill in the internal IP addresses provided in the file `/training/.secrets/README.md` for the controlplane-node and the worker node in the kubev configuration file `/training/cluster.yaml`.
+Fill in the internal IP addresses provided in the file `/training/.secrets/README.md` for the controlplane-node and the worker-node in the kubev configuration file `/training/cluster.yaml`.
 
 ## Run the installer
 
