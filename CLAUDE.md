@@ -8,19 +8,26 @@ A KubeVirt / Kubermatic Virtualization training environment. Trainees connect to
 
 ## Training container
 
-The jumphost is a code-server (browser VS Code) container defined by `container-image/dockerfile`. There is **no Makefile** — build and run it with `docker` directly:
+The jumphost is a code-server (browser VS Code) container defined by `container-image/dockerfile`. The repo `makefile` wraps the docker workflow (image tag `kubev:0.0.0`):
 
 ```bash
-# build
-docker build -t kubev:0.0.0 ./container-image/
+make lint    # hadolint ./container-image/dockerfile
+make build   # depends on lint; builds the image
+make run     # depends on build; runs detached, --hostname jumphost, -p 8080:8080, -v $PWD:/training, --restart=always
+make clear   # docker rmi kubev:0.0.0
+```
 
-# run detached, mount repo at /training, expose code-server on http://localhost:8080
+Equivalent raw `docker` invocation (if `make` isn't available):
+
+```bash
+docker build -t kubev:0.0.0 ./container-image/
 docker run -d --name kubev -p 8080:8080 -v "$PWD":/training kubev:0.0.0
 ```
 
 The container runs `code-server` with `--auth none --bind-addr 0.0.0.0:8080`; trainees access it in a browser. There is no authentication on the IDE itself — only ever expose it on `localhost`.
 
 Inside the container, `/root/.trainingrc` (sourced by `.zshrc`) sets:
+
 - `KUBECONFIG=/training/.secrets/kubev-cluster-kubeconfig`
 - `alias code=code-server`
 - shell completions for kubectl, helm, helmfile, virtctl
@@ -72,4 +79,4 @@ Per repo `README.md`, trainees receive a `.secrets/` bundle out-of-band containi
 
 ## Gitignore highlights
 
-`bin/`, `charts/`, `*.tar.gz`, `**-linux-amd64**`, `*kubeconfig`, `kubeone_*`, `tf_infra`, `.secrets/`, `.DS_Store`, `.claude/`, and notably `CLAUDE.md` itself are gitignored — this file is local-only.
+`bin/`, `charts/`, `*.tar.gz`, `**-linux-amd64**`, `*kubeconfig`, `kubeone_*`, `tf_infra`, `.secrets/`, `.DS_Store` are gitignored.
