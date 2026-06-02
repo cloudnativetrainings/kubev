@@ -17,7 +17,7 @@ dashboard:
     basic: {}
 ```
 
-Apply the change. Note you may have to reset the env vars if you are on a different bash now.
+Apply the change. Note you may have to reset the env vars if you are in a different bash now.
 
 ```bash
 # set the quay username
