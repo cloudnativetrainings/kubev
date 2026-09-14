@@ -1,6 +1,6 @@
 # Installing kubermatic-virtualization to your environment
 
-In this lab you will learn how to install kubermatic-virtualization binary to your environment. This will be used to create a k8s cluster and install all the needed components, in the right versions, into it.
+In this lab you will learn how to install the kubermatic-virtualization binary to your environment. This will be used to create a k8s cluster and install all the needed components, in the right versions, into it.
 
 See [documentation](https://docs.kubermatic.com/kubermatic-virtualization/v1.1.0/getting-kubermatic-virtualization/) for details.
 

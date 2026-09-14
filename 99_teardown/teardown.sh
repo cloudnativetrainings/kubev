@@ -15,5 +15,5 @@ rm -rf /etc/cni/
 
 apt-mark unhold $(apt-mark showhold)
 
-apt update && apt-get upgrade -y && apt auto-remove
+apt update && apt-get upgrade -y && apt autoremove -y
 

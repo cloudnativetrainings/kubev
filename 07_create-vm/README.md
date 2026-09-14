@@ -26,7 +26,7 @@ watch -n 1 kubectl get pods,vm,vmi,pv,pvc
 kubectl logs virt-launcher-... -c guest-console-log
 ```
 
-> Note: several pods pop up (cdi-upload-tmp-pvc, source, virtlauncher pods) which are creating the VM instance.
+> Note: several pods pop up (cdi-upload-tmp-pvc, source, virt-launcher pods) which are creating the VM instance.
 
 ## Managing running VMs
 

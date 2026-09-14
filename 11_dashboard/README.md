@@ -1,6 +1,6 @@
 # Installing kubermatic-virtualization-dashboard to your environment
 
-In this lab you will learn how to install kubermatic-virtualization-dashboard to your environment.
+In this lab you will learn how to install the kubermatic-virtualization-dashboard to your environment.
 
 See [documentation](https://docs.kubermatic.com/kubermatic-virtualization/v1.1.0/configuration-guide/#dashboard) for details.
 
