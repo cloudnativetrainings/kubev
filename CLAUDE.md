@@ -8,12 +8,12 @@ A KubeVirt / Kubermatic Virtualization training environment. Trainees connect to
 
 ## Training container
 
-The jumphost is a code-server (browser VS Code) container defined by `container-image/dockerfile`. The repo `makefile` wraps the docker workflow (image tag `kubev:0.0.0`):
+The jumphost is a code-server (browser VS Code) container built from `ubuntu:26.04`, defined by `container-image/dockerfile`. The repo `makefile` wraps the docker workflow (image tag `kubev:0.0.0`, container/hostname `kubermatic-virtualization-workshop`):
 
 ```bash
 make lint    # hadolint ./container-image/dockerfile
 make build   # depends on lint; builds the image
-make run     # depends on build; runs detached, --hostname jumphost, -p 8080:8080, -v $PWD:/training, --restart=always
+make run     # depends on build; runs detached as --name/--hostname kubermatic-virtualization-workshop, -p 8080:8080, -v $PWD:/training, --restart=always
 make clear   # docker rmi kubev:0.0.0
 ```
 
@@ -21,19 +21,16 @@ Equivalent raw `docker` invocation (if `make` isn't available):
 
 ```bash
 docker build -t kubev:0.0.0 ./container-image/
-docker run -d --name kubev -p 8080:8080 -v "$PWD":/training kubev:0.0.0
+docker run -d --name kubermatic-virtualization-workshop -p 8080:8080 -v "$PWD":/training kubev:0.0.0
 ```
 
-The container runs `code-server` with `--auth none --bind-addr 0.0.0.0:8080`; trainees access it in a browser. There is no authentication on the IDE itself — only ever expose it on `localhost`.
+The container runs `code-server` with `--auth none --bind-addr 0.0.0.0:8080` (plus `--disable-telemetry --disable-update-check --disable-workspace-trust --disable-getting-started-override`); trainees access it in a browser. There is no authentication on the IDE itself — only ever expose it on `localhost`.
 
-Inside the container, `/root/.trainingrc` (sourced by `.zshrc`) sets:
+The default shell is zsh (oh-my-zsh + powerlevel10k). `/root/.trainingrc` (sourced by `.zshrc`) sets `alias code=code-server` and shell completions for yq, kubectl, helm, helmfile, virtctl. `PATH` includes `/root/.krew/bin` (set via `ENV`, not `.trainingrc`). Every new shell runs `container-image/welcome.sh`, which banners the installed tool versions and echoes `$KUBECONFIG`.
 
-- `KUBECONFIG=/training/.secrets/kubev-cluster-kubeconfig`
-- `alias code=code-server`
-- shell completions for kubectl, helm, helmfile, virtctl
-- `PATH` includes `/root/.krew/bin`
+**`KUBECONFIG` is *not* preset anywhere in the image** (the `export KUBECONFIG=/training/.secrets/kubev-cluster-kubeconfig` line was dropped from `.trainingrc` in the "consolidate ide look and feel" rework) — despite lab 04's README still describing the kubeconfig move as happening "to the location `$KUBECONFIG` is set, for convenience." Trainees currently need to export it themselves; treat this as a likely regression, not an intentional change, if asked to investigate broken `kubectl`/`kubev` commands.
 
-Tooling baked into the image via pinned `ARG`s in `container-image/dockerfile`: kubectl (`K8S_VERSION=1.34.5`), krew (`KREW_VERSION=0.5.0`), helm (`HELM_VERSION=4.1.3`), helmfile (`HELMFILE_VERSION=1.4.3`), virtctl (`VIRTCTL_VERSION=1.5.3`), plus kubectx and standard net utilities (curl, wget, nmap, traceroute, arping, netcat-openbsd, apache2-utils). **Do not bump these pins casually** — labs depend on the exact toolchain.
+Tooling baked into the image via pinned `ARG`s in `container-image/dockerfile` (resolved per-arch via `$TARGETARCH`): yq (`YQ_VERSION=4.53.6`), code-server (`CODE_SERVER_VERSION=4.135.0`), kubectl (`K8S_VERSION=1.36.4`), krew (`KREW_VERSION=0.5.0`), helm (`HELM_VERSION=4.2.4`), helmfile (`HELMFILE_VERSION=1.7.4`), virtctl (`VIRTCTL_VERSION=1.6.5`), plus kubectx, VS Code extensions (prettier, YAML, Terraform), and standard net/CLI utilities (curl, wget, nmap, traceroute, arping, netcat-openbsd, apache2-utils, htop, dnsutils). **Do not bump these pins casually** — labs depend on the exact toolchain.
 
 ## Lab sequence
 
@@ -76,6 +73,7 @@ Per repo `README.md`, trainees receive a `.secrets/` bundle out-of-band containi
 - `kubectl port-forward` → ssh into the VM no longer works ("TODO does not work anymore" in lab 08).
 - MetalLB `IPAddressPool` sometimes isn't created by the installer (kubermatic-virtualization#149); `metallb.yaml` is the manual fallback.
 - multus pods may CrashLoop on low memory; the optional helm upgrade in lab 04 redeploys the bundled `charts/multus-cni/` chart.
+- The container image no longer preexports `$KUBECONFIG` (see "Training container" above); lab 04's README text hasn't been updated to match.
 
 ## Gitignore highlights
 
