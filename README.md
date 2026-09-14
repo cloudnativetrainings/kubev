@@ -14,28 +14,20 @@ Visit http://localhost:8080 in your browser.
 
 ```bash
 # create the directory /training/.secrets/
-mkdir /training/.secrets/
+mkdir -p /training/.secrets/
 ```
 
 Drag and drop the sensitive files you received into the directory `/training/.secrets/`.
 
 ```bash
 # ensure a comfy way for doing ssh stuff
-mkdir /root/.ssh
+mkdir -p /root/.ssh
 ```
 
 ```bash
-# ensure a comfy way for doing ssh stuff
+# copy the ssh files in the /root/ssh directory
 install -m 600 -o root -g root /training/.secrets/gcp-kubev /root/.ssh
-```
-
-```bash
-# ensure a comfy way for doing ssh stuff
 install -m 600 -o root -g root /training/.secrets/gcp-kubev.pub /root/.ssh
-```
-
-```bash
-# ensure a comfy way for doing ssh stuff
 install -m 600 -o root -g root /training/.secrets/gcp-kubev-config /root/.ssh/config
 ```
 

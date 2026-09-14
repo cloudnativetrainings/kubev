@@ -2,11 +2,16 @@
 
 In this lab you will learn how to install the kubermatic-virtualization binary to your environment. This will be used to create a k8s cluster and install all the needed components, in the right versions, into it.
 
-See [documentation](https://docs.kubermatic.com/kubermatic-virtualization/v1.1.0/getting-kubermatic-virtualization/) for details.
+See [documentation](https://docs.kubermatic.com/kubermatic-virtualization/v1.2.0/getting-kubermatic-virtualization/) for details.
 
 ```bash
 # download the kubermatic-ee-downloader
 curl -sfL https://raw.githubusercontent.com/kubermatic/kubermatic-ee-downloader/main/install.sh | sh
+```
+
+```bash
+# verify
+./kubermatic-ee-downloader --version
 ```
 
 After downloading and installing the kubermatic-ee-downloader, you have to provide credentials to install the kubermatic-virtualization-installer. For the workshop you will receive a temporary license. Please contact us if you want to get a permanent license.
@@ -31,8 +36,6 @@ export KUBEV_PASSWORD=<FILL-IN-QUAY-PASSWORD>
 ./kubermatic-ee-downloader get kubermatic-virtualization --username $KUBEV_USERNAME --password $KUBEV_PASSWORD
 ```
 
-Add some convenience to your environment.
-
 ```bash
 # install kubermatic-virtualization into your path
 install -m 700 -o root -g root /training/kubermatic-virtualization /usr/local/bin/kubev
@@ -41,4 +44,19 @@ install -m 700 -o root -g root /training/kubermatic-virtualization /usr/local/bi
 ```bash
 # verify
 kubev version
+```
+
+<!-- TODO -->
+<!-- kubelet version -->
+```
+│ Kubermatic Virtualization          v1.2.0                            │
+│ Kubernetes                         v1.34.7                           │
+│ KubeOVN CNI                        v1.15.16                          │
+│ Multus CNI                         v4.2.3                            │
+│ Kyverno                            3.5.3                             │
+│ Metal LB                           0.15.3                            │
+│ Cert Manager                       v1.18.5                           │
+│ Longhorn                           1.9.1                             │
+│ Kubevirt                           v1.6.5-1                          │
+│ Kubevirt CDI                       v1.64.0     
 ```

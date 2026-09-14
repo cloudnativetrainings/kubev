@@ -56,13 +56,12 @@ kubectl get datavolumes
 virtctl restart my-vm
 ```
 
+<!-- TODO make use of envvar -->
+<!-- TODO does not work -->
 ```bash
 # check in VM
-kubectl get nodes -o wide
-```
 
-```bash
-# check in VM
+kubectl get nodes -o wide
 ssh -i /root/.ssh/gcp-kubev root@<FILL-IN-INTERNAL-IP-OF-WORKER-NODE> -p 30022
 ```
 

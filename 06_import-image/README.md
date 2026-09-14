@@ -18,4 +18,8 @@ kubectl apply -f /training/ubuntu-image-datavolume.yaml
 watch -n 1 kubectl get pods,datavolume,pv,pvc
 ```
 
-> Note: a pod called importer-prime-... gets started which will download the image and store it in a PV. The VM you will create later needs it for bootstrapping.
+> Note: a pod called importer-prime-... gets started which will download the image and store it in a PV. Based on this image you will create a VM afterwards.
+
+<!-- TODO kubeconfig in welcome.sh does not work -->
+<!-- TODO there is no trainingrc file -->
+<!-- TODO no CCM by design? -->

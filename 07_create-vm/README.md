@@ -38,6 +38,8 @@ kubectl logs virt-launcher-... -c guest-console-log
 kubectl delete vmi my-vm
 ```
 
+<!-- TODO get rid of virtctl -->
+
 ```bash
 # start the vm
 virtctl start my-vm

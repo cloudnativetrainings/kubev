@@ -40,12 +40,3 @@ export KUBECONFIG=/training/.secrets/kubev-cluster-kubeconfig
 # verify the installed components are all in running state
 kubectl get pods --all-namespaces
 ```
-
-```bash
-# [OPTIONAL] if the kube-multus pods are not in state running you may have to increase the memory
-# if so, apply the multus-cni helm chart like this
-# NOTE: this issue already got addressed via https://github.com/kubermatic/kubermatic-virtualization/pull/146
-helm upgrade --install --rollback-on-failure --debug \
-  --namespace kube-system multus-cni \
-  /training/charts/multus-cni/
-```

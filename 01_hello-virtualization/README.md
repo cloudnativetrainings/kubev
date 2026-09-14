@@ -28,11 +28,7 @@ ls -alh /root/.ssh/
 ```bash
 # install needed tools
 apt update
-```
-
-```bash
-# install needed tools
-apt install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst cpu-checker cloud-image-utils
+apt install -y qemu-system-x86 libvirt-daemon-system libvirt-clients bridge-utils virtinst cpu-checker cloud-image-utils
 ```
 
 ```bash
@@ -59,19 +55,20 @@ ls -alh /etc/libvirt/qemu/
 
 ```bash
 # download ubuntu image which supports cloud-init
-wget https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-amd64.img
+curl -LO https://cloud-images.ubuntu.com/releases/resolute/release/ubuntu-26.04-server-cloudimg-amd64.img
 ```
 
 ```bash
 # copy img file to where libvirt expects it
-cp ubuntu-24.04-server-cloudimg-amd64.img /var/lib/libvirt/images/
+cp ubuntu-26.04-server-cloudimg-amd64.img /var/lib/libvirt/images/
 ```
 
 ```bash
 # change ownership
-chown libvirt-qemu:libvirt-qemu /var/lib/libvirt/images/ubuntu-24.04-server-cloudimg-amd64.img
+chown libvirt-qemu:libvirt-qemu /var/lib/libvirt/images/ubuntu-26.04-server-cloudimg-amd64.img
 ```
 
+<!-- TODO note that copy and paste is necessary -->
 ```bash
 # create an iso which will allow you to connect to the vm afterwards
 # note you are on the worker node, you have to use vi on the worker node and not the IDE running on the jumphost
@@ -106,7 +103,7 @@ virt-install \
   --memory 4096 \
   --vcpus 2 \
   --os-variant ubuntu24.04 \
-  --disk path=/var/lib/libvirt/images/ubuntu-24.04-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
+  --disk path=/var/lib/libvirt/images/ubuntu-26.04-server-cloudimg-amd64.img,format=qcow2,bus=virtio \
   --disk path=/var/lib/libvirt/images/seed.iso,device=cdrom \
   --network network=default \
   --import \
@@ -131,7 +128,8 @@ virsh list --all
 ```
 
 ```bash
-# access the vm via virsh
+# access the vm via virsh (you can find the user/password in the file /training/user-data.yaml)
+# note that you can exit the vm via "Ctrl + ]"
 virsh console my-vm
 ```
 
@@ -148,14 +146,7 @@ ssh -v -i /root/.ssh/gcp-kubev root@<FILL-IN-IP-OF-VM>
 ## Destroy VM
 
 ```bash
-virsh list --name
-```
-
-```bash
 virsh destroy my-vm
-```
-
-```bash
 virsh undefine my-vm --remove-all-storage
 ```
 
@@ -167,10 +158,6 @@ virsh list --all
 ```bash
 # verify
 ls -alh /var/lib/libvirt/images/
-```
-
-```bash
-# verify
 ls -alh /etc/libvirt/qemu/
 ```
 
@@ -179,6 +166,9 @@ ls -alh /etc/libvirt/qemu/
 exit
 ```
 
+<!-- TODO -->
+
+<!-- 
 ## Debug VM creation
 
 If you cannot reach the VM after creation, you can do the following to get logs of the VM.
@@ -193,4 +183,4 @@ If you cannot reach the VM after creation, you can do the following to get logs 
 ```bash
 # afterwards you have a log file for debugging
 tail -f /tmp/my-vm-serial.log
-```
+``` -->

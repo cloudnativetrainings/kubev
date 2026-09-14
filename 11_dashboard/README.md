@@ -10,6 +10,8 @@ See [documentation](https://docs.kubermatic.com/kubermatic-virtualization/v1.1.0
 
 Add the following to the file named `/training/cluster.yaml`.
 
+<!-- TODO add gcloud vor checking stuff in cli -->
+
 ```yaml
 dashboard:
   enabled: true
@@ -28,6 +30,17 @@ export KUBEV_USERNAME=<FILL-IN-QUAY-USERNAME>
 # set the quay password
 export KUBEV_PASSWORD=<FILL-IN-QUAY-PASSWORD>
 ```
+
+<!-- TODO did not work due to problems on worker with dns resolution
+
+hostname -f
+hostname: Temporary failure in name resolution
+root@kvw-hubert-01:~# echo "127.0.1.1 $(hostname)" | sudo tee -a /etc/hosts
+127.0.1.1 kvw-hubert-01.europe-west3-a.c.kv-del-codespaces-01.internal
+root@kvw-hubert-01:~# hostname -f
+kvw-hubert-01.europe-west3-a.c.kv-del-codespaces-01.internal
+root@kvw-hubert-01:~# 
+ -->
 
 ```bash
 # apply
@@ -61,6 +74,8 @@ kubectl -n kubermatic-virtualization get svc kubev-dashboard
 kubectl get nodes -o wide
 ```
 
+<!-- TODO make this easier to consume -->
+
 ```bash
 # get the credentials
 kubectl -n kubermatic-virtualization get secret kubev-basic-auth -o yaml
@@ -72,5 +87,11 @@ The username is `admin`.
 # get the password
 echo <FILL-IN-THE-PASSWORD> | base64 -d
 ```
+
+<!-- There is no external ip of the worker node!!!!  via kubectl but via console and readme -->
+
+<!-- TODO get rid of # on doing echo commands -->
+
+<!-- TODO does not work no vms shown in ui -->
 
 The url of the dashboard is `http://<EXTERNAL-IP-OF-WORKER-NODE>:<NODEPORT-OF-DASHBOARD-SERVICE>`.

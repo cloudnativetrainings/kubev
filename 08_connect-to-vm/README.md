@@ -5,6 +5,10 @@ In this lab you will learn how to connect to the VM.
 
 ## Via virtctl
 
+### Via ssh
+
+<!-- TODO does not work -->
+
 ```bash
 # connect via ssh
 virtctl ssh root@my-vm --identity-file /root/.ssh/gcp-kubev
@@ -20,6 +24,10 @@ hostname
 # note, if that does not work, you got a hint on how to disconnect
 exit
 ```
+
+### Via console
+
+<!-- TODO exit the vm command -->
 
 ```bash
 # connect via console
@@ -67,7 +75,10 @@ kubectl get nodes -o wide
 ```bash
 # connect to the vm via the nodeport 30022 on the worker node
 ssh -i /root/.ssh/gcp-kubev root@<FILL-IN-INTERNAL-IP-OF-WORKER-NODE> -p 30022
+ssh -i /root/.ssh/gcp-kubev root@10.156.0.4 -p 30022
 ```
+
+<!-- TODO store ip of cp and worker node in env in .trainingrc -->
 
 ```bash
 # printout the hostname of the vm
