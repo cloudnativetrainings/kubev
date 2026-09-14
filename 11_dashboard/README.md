@@ -22,10 +22,14 @@ Apply the change. Note you may have to reset the env vars if you are in a differ
 ```bash
 # set the quay username
 export KUBEV_USERNAME=<FILL-IN-QUAY-USERNAME>
+```
 
+```bash
 # set the quay password
 export KUBEV_PASSWORD=<FILL-IN-QUAY-PASSWORD>
+```
 
+```bash
 # apply
 kubev apply -f /training/cluster.yaml -y
 ```
@@ -35,26 +39,38 @@ kubev apply -f /training/cluster.yaml -y
 ```bash
 # verify everything is in a proper state
 kubectl -n kubermatic-virtualization get all
+```
 
+```bash
 # take a look at the service
-kubectl -n kubermatic-virtualization get svc kubev-dashboard     
+kubectl -n kubermatic-virtualization get svc kubev-dashboard
+```
 
+```bash
 # change the type of the service from ClusterIP to NodePort
-kubectl -n kubermatic-virtualization edit svc kubev-dashboard     
+kubectl -n kubermatic-virtualization edit svc kubev-dashboard
+```
 
+```bash
 # get the nodeport of the service
-kubectl -n kubermatic-virtualization get svc kubev-dashboard 
+kubectl -n kubermatic-virtualization get svc kubev-dashboard
+```
 
+```bash
 # get the external ip of the worker node
 kubectl get nodes -o wide
+```
 
+```bash
 # get the credentials
 kubectl -n kubermatic-virtualization get secret kubev-basic-auth -o yaml
+```
 
-# the username is `admin`
+The username is `admin`.
 
+```bash
 # get the password
 echo <FILL-IN-THE-PASSWORD> | base64 -d
-
-# the url of the dashboard is http://<EXTERNAL-IP-OF-WORKER-NODE>:<NODEPORT-OF-DASHBOARD-SERVICE>
 ```
+
+The url of the dashboard is `http://<EXTERNAL-IP-OF-WORKER-NODE>:<NODEPORT-OF-DASHBOARD-SERVICE>`.

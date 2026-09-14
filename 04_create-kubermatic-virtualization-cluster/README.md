@@ -14,24 +14,38 @@ The installer will set up a Kubernetes cluster via [kubeone](https://github.com/
 ```bash
 # trigger the installation
 kubev apply -f /training/cluster.yaml -y
+```
 
+```bash
 # you can take a look at the logs of the installation process via
 tail -f /tmp/kubermatic-virtualization.log
+```
 
+```bash
 # verify if cluster is fine
 kubectl --kubeconfig /training/kubev-cluster-kubeconfig get nodes
+```
 
+```bash
 # move the kubeconfig created via kubeone into .secrets/, then export KUBECONFIG to point at it
 mv /training/kubev-cluster-kubeconfig /training/.secrets/kubev-cluster-kubeconfig
-export KUBECONFIG=/training/.secrets/kubev-cluster-kubeconfig
+```
 
+```bash
+# move the kubeconfig created via kubeone into .secrets/, then export KUBECONFIG to point at it
+export KUBECONFIG=/training/.secrets/kubev-cluster-kubeconfig
+```
+
+```bash
 # verify the installed components are all in running state
 kubectl get pods --all-namespaces
+```
 
+```bash
 # [OPTIONAL] if the kube-multus pods are not in state running you may have to increase the memory
 # if so, apply the multus-cni helm chart like this
 # NOTE: this issue already got addressed via https://github.com/kubermatic/kubermatic-virtualization/pull/146
 helm upgrade --install --rollback-on-failure --debug \
   --namespace kube-system multus-cni \
-  /training/charts/multus-cni/ 
+  /training/charts/multus-cni/
 ```

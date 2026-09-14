@@ -4,14 +4,17 @@
 In this lab you will learn how to create an image which will be used for creating VMs afterwards.
 
 ```bash
-
 # inspect the file /training/ubuntu-image-datavolume.yaml
 code /training/ubuntu-image-datavolume.yaml
+```
 
+```bash
 # apply the datavolume
 kubectl apply -f /training/ubuntu-image-datavolume.yaml
+```
 
-# watch the process 
+```bash
+# watch the process
 watch -n 1 kubectl get pods,datavolume,pv,pvc
 ```
 

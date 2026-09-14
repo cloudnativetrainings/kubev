@@ -14,13 +14,19 @@ After downloading and installing the kubermatic-ee-downloader, you have to provi
 ```bash
 # set the quay username
 export KUBEV_USERNAME=<FILL-IN-QUAY-USERNAME>
+```
 
+```bash
 # set the quay password
 export KUBEV_PASSWORD=<FILL-IN-QUAY-PASSWORD>
+```
 
+```bash
 # list all installable products
 ./kubermatic-ee-downloader list
+```
 
+```bash
 # get the kubermatic-virtualization-installer
 ./kubermatic-ee-downloader get kubermatic-virtualization --username $KUBEV_USERNAME --password $KUBEV_PASSWORD
 ```
@@ -30,7 +36,9 @@ Add some convenience to your environment.
 ```bash
 # install kubermatic-virtualization into your path
 install -m 700 -o root -g root /training/kubermatic-virtualization /usr/local/bin/kubev
+```
 
+```bash
 # verify
 kubev version
 ```

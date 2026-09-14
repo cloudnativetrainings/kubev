@@ -6,22 +6,25 @@ In this lab you will learn how to create a VM.
 ## User Management for the VM
 
 ```bash
-
 # inspect the file /training/my-vm.yaml
 code /training/my-vm.yaml
-
-# add the content of /training/user-data.yaml into /training/my-vm.yaml in the volume called cloudinit
 ```
+
+Add the content of `/training/user-data.yaml` into `/training/my-vm.yaml` in the volume called `cloudinit`.
 
 ## Start the VM creation process
 
 ```bash
 # apply the vm
 kubectl apply -f /training/my-vm.yaml
+```
 
+```bash
 # watch the vm being created
 watch -n 1 kubectl get pods,vm,vmi,pv,pvc
+```
 
+```bash
 # getting the logs of the VM
 kubectl logs virt-launcher-... -c guest-console-log
 ```
@@ -33,7 +36,9 @@ kubectl logs virt-launcher-... -c guest-console-log
 ```bash
 # stop the vm
 kubectl delete vmi my-vm
+```
 
+```bash
 # start the vm
-virtctl start my-vm  
+virtctl start my-vm
 ```
