@@ -21,7 +21,7 @@ tail -f /tmp/kubermatic-virtualization.log
 # verify if cluster is fine
 kubectl --kubeconfig /training/kubev-cluster-kubeconfig get nodes
 
-# copy the kubeconfig created via kubeone to the location the $KUBECONFIG is set, for convenience only
+# move the kubeconfig created via kubeone to the location the $KUBECONFIG is set, for convenience only
 mv /training/kubev-cluster-kubeconfig /training/.secrets/kubev-cluster-kubeconfig
 
 # verify the installed components are all in running state

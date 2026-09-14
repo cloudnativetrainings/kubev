@@ -1,5 +1,6 @@
 IMAGE_NAME=kubev
 IMAGE_TAG=0.0.0
+CONTAINER_NAME=kubermatic-virtualization-workshop
 
 .PHONY: clear
 clear:
@@ -16,11 +17,16 @@ build: lint
 .PHONY: run
 run: build
 	docker run -it -d \
+		--name $(CONTAINER_NAME) \
 		--restart=always \
 		-p 8080:8080 \
-		--hostname jumphost \
+		--hostname kubermatic-virtualization-workshop \
 		-v $(PWD):/training \
 		$(IMAGE_NAME):$(IMAGE_TAG)
+
+# .PHONY: push
+# push: lint
+# 	docker push --platform linux/amd64 --tag ${IMAGE_NAME}:${IMAGE_TAG} --push .
 
 # TODO compose? healthchecks?		
 

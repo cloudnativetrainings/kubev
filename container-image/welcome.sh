@@ -1,10 +1,11 @@
 #!/bin/bash
 
-echo "╔══════════════════════════════════╗"
-echo "║        KubeVirt Training         ║"
-echo "╚══════════════════════════════════╝"
+echo "╔════════════════════════════════════╗"
+echo "║ Kubermatic Virtualization Training ║"
+echo "╚════════════════════════════════════╝"
 echo ""
 echo "tools:"
+echo "  zsh       $(zsh --version 2>/dev/null | awk '{print $2}')"
 echo "  kubectl   $(kubectl version --client --output=yaml 2>/dev/null | grep gitVersion | awk '{print $2}')"
 echo "  krew      $(kubectl krew version 2>/dev/null | grep GitTag | awk '{print $2}')"
 echo "  helm      $(helm version --short 2>/dev/null)"
