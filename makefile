@@ -20,7 +20,7 @@ run: build
 		--name $(CONTAINER_NAME) \
 		--restart=always \
 		-p 8080:8080 \
-		--hostname kubermatic-virtualization-workshop \
+		--hostname jumphost \
 		-v $(PWD):/training \
 		$(IMAGE_NAME):$(IMAGE_TAG)
 
