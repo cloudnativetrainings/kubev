@@ -21,7 +21,7 @@ run: build
 		--restart=always \
 		-p 8080:8080 \
 		--hostname jumphost \
-		-v $(PWD):/training \
+		-v /root/training-kubev:/training \
 		$(IMAGE_NAME):$(IMAGE_TAG)
 
 # .PHONY: push
