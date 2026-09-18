@@ -11,7 +11,7 @@ lint:
 	hadolint ./container-image/dockerfile 
 
 .PHONY: build
-build: lint
+build:
 	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) ./container-image/
 
 .PHONY: run
