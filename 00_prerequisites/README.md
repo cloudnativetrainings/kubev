@@ -17,7 +17,14 @@ Visit http://localhost:8080 in your browser.
 mkdir -p /training/.secrets/
 ```
 
-Drag and drop the sensitive files you received into the directory `/training/.secrets/`.
+Drag and drop the sensitive files you received into the directory `/training/.secrets/`:
+
+- environment.sh
+- gcp-kubev
+- gcp-kubev-config
+- gcp-kubev.pub
+- gcp-service-account.json
+- README.md
 
 ```bash
 # ensure a comfy way for doing ssh stuff
@@ -46,10 +53,33 @@ ssh controlplane-node
 ssh worker-node
 ```
 
+## Set important environment variables
+
+> **IMPORTANT:**
+> These variables will get referenced during the following labs. Make sure to set them before continuing.
+
+```bash
+# make the shell script executable
+chmod 0700 /training/.secrets/environment.sh
+
+# persist the environment variables into the file /root/.trainingrc
+/training/.secrets/environment.sh
+
+# ensure changes are applied in your current bash
+source /root/.trainingrc
+
+# verify
+echo $GCP_PROJECT
+echo $TRAINEE_NAME
+echo $TRAINEE_EMAIL
+```
+
 ## Configure gcp
 
 >**NOTE:**
 >For terraform and kubeone it is enough having the environment variable called `GOOGLE_CREDENTIALS` set properly. In our case we need access to gcloud via terminal for being able to create infrastructure like DNS entries.
+
+<!-- TODO do I really need GOOGLE_CREDENTIALS???-->
 
 ```bash
 # activate gcp account
@@ -73,8 +103,5 @@ gcloud config list
 source /root/.trainingrc
 
 # verify
-
-TODO
-
 make verify
 ```

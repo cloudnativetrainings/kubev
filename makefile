@@ -24,6 +24,36 @@ run: build
 		-v /root/training-kubev:/training \
 		$(IMAGE_NAME):$(IMAGE_TAG)
 
+.PHONY: verify
+verify:
+	test -f /root/.trainingrc
+	grep "source /root/.trainingrc" /root/.zshrc
+	kubectl version --client
+	gcloud version
+	kubectx
+	helm version
+	test -n "$(GCP_PROJECT)"
+	test -n "$(TRAINEE_NAME)"
+	test -n "$(TRAINEE_EMAIL)"
+	test -n "$(JH_EXT_IP)"
+	test -n "$(JH_INT_IP)"
+	test -n "$(CP_EXT_IP)"
+	test -n "$(CP_INT_IP)"
+	test -n "$(W_EXT_IP)"
+	test -n "$(W_INT_IP)"
+# TODO	kubens => failing due no cluster yet
+	test -n "$(K8S_VERSION)"
+	test -e /training/.secrets/environment.sh
+	test -e /training/.secrets/gcp-kubev
+	test -e /training/.secrets/gcp-kubev-config
+	test -e /training/.secrets/gcp-kubev.pub
+	test -e /training/.secrets/gcp-service-account.json
+	test -e /training/.secrets/README.md
+# TODO ensure that is the right ssh key - ssh-add -l | grep "$(ssh-keygen -lf .secrets/gce)"
+# TODO test -v $(GOOGLE_CREDENTIALS)
+# TODO verify gcp sa permissions
+	echo "Training Environment successfully verified"
+
 # .PHONY: push
 # push: lint
 # 	docker push --platform linux/amd64 --tag ${IMAGE_NAME}:${IMAGE_TAG} --push .
