@@ -5,6 +5,7 @@
   // shell
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.hideOnStartup": "never",
+  "terminal.integrated.cwd": "/training",
   "task.allowAutomaticTasks": "on",
   // ui
   "window.autoDetectColorScheme": true,

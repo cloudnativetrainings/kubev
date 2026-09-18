@@ -29,3 +29,8 @@ scheduling
 ...
 
 => do we know some tool which can handle this???
+
+# ensure that /training/ gets opened on startup on other trainings
+
+via WORDIR
+via vscode setting

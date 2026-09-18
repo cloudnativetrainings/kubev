@@ -5,6 +5,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG DEBIAN_FRONTEND=noninteractive
 ARG TARGETARCH
 
+WORKDIR /training
+
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install --no-install-recommends -y \
   curl \
@@ -127,6 +129,8 @@ RUN echo 'alias code=code-server' >> /root/.trainingrc
 COPY ./welcome.sh /root/welcome.sh
 RUN chmod +x /root/welcome.sh \
   && echo '/root/welcome.sh' >> /root/.trainingrc
+
+WORKDIR /training
 
 EXPOSE 8080
 
