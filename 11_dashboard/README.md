@@ -71,6 +71,7 @@ kubectl -n kubermatic-virtualization get svc kubev-dashboard
 
 ```bash
 # get the external ip of the worker node
+# TODO via en
 kubectl get nodes -o wide
 ```
 
@@ -85,10 +86,12 @@ The username is `admin`.
 
 ```bash
 # get the password
-echo <FILL-IN-THE-PASSWORD> | base64 -d
-```
+echo <FILL-IN-THE-PASSWORD> | base64 -d```
 
-<!-- There is no external ip of the worker node!!!!  via kubectl but via console and readme -->
+```bash
+# get the nodeport of the kubev-dashboard service
+kubectl -n kubermatic-virtualization get svc kubev-dashboard -o jsonpath="{.spec.ports[0].nodePort}"
+```
 
 <!-- TODO get rid of # on doing echo commands -->
 

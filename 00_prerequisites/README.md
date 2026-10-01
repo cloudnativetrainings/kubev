@@ -10,6 +10,31 @@ Please ensure you have done the steps as described in the `README.md` file you h
 
 ## Using the IDE
 
+<!-- TODO add quay via .trainingrc -->
+
+<!-- TODO
+
+gcloud compute instances list
+
+WARNING: Some requests did not succeed.
+ - Required 'compute.instances.list' permission for 'projects/kv-seitenbau'
+
+Listed 0 items.
+ -->
+
+ <!-- TODO
+
+echo $W_EXT_IP
+
+is set to internal ip!!!!
+ 
+  -->
+
+<!-- TODO
+
+echo commands do # at the end
+ -->
+
 Visit http://localhost:8080 in your browser.
 
 ```bash
@@ -72,6 +97,12 @@ source /root/.trainingrc
 echo $GCP_PROJECT
 echo $TRAINEE_NAME
 echo $TRAINEE_EMAIL
+echo $JUMPHOST_INT_IP
+echo $JUMPHOST_EXT_IP
+echo $CONTROLPLANE_INT_IP
+echo $CONTROLPLANE_EXT_IP
+echo $WORKER_INT_IP
+echo $WORKER_EXT_IP
 ```
 
 ## Configure gcp

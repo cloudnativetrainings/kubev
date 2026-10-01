@@ -35,12 +35,12 @@ verify:
 	test -n "$(GCP_PROJECT)"
 	test -n "$(TRAINEE_NAME)"
 	test -n "$(TRAINEE_EMAIL)"
-	test -n "$(JH_EXT_IP)"
-	test -n "$(JH_INT_IP)"
-	test -n "$(CP_EXT_IP)"
-	test -n "$(CP_INT_IP)"
-	test -n "$(W_EXT_IP)"
-	test -n "$(W_INT_IP)"
+	test -n "$(JUMPHOST_EXT_IP)"
+	test -n "$(JUMPHOST_INT_IP)"
+	test -n "$(CONTROLPLANE_EXT_IP)"
+	test -n "$(CONTROLPLANE_INT_IP)"
+	test -n "$(WORKER_EXT_IP)"
+	test -n "$(WORKER_INT_IP)"
 # TODO	kubens => failing due no cluster yet
 	test -n "$(K8S_VERSION)"
 	test -e /training/.secrets/environment.sh
