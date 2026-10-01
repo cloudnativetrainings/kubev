@@ -34,3 +34,8 @@ scheduling
 
 via WORDIR
 via vscode setting
+
+#
+<!-- TODO add quay via .trainingrc -->
+
+# echo commands do # at the end

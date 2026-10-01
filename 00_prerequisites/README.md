@@ -1,6 +1,6 @@
-# Kubermatic Virtualization
+# Prerequisites
 
-In this training you will learn how to install and use Kubermatic Virtualization.
+In this lab you will learn how to install and use Kubermatic Virtualization.
 
 ## Training Setup
 
@@ -9,31 +9,6 @@ You should have received sensitive information giving you access to VMs with nes
 Please ensure you have done the steps as described in the `README.md` file you have received.
 
 ## Using the IDE
-
-<!-- TODO add quay via .trainingrc -->
-
-<!-- TODO
-
-gcloud compute instances list
-
-WARNING: Some requests did not succeed.
- - Required 'compute.instances.list' permission for 'projects/kv-seitenbau'
-
-Listed 0 items.
- -->
-
- <!-- TODO
-
-echo $W_EXT_IP
-
-is set to internal ip!!!!
- 
-  -->
-
-<!-- TODO
-
-echo commands do # at the end
- -->
 
 Visit http://localhost:8080 in your browser.
 

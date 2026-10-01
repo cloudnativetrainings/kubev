@@ -27,18 +27,8 @@ kubectl --kubeconfig /training/kubev-cluster-kubeconfig get nodes
 ```
 
 ```bash
-# move the kubeconfig created via kubeone into .secrets/, then export KUBECONFIG to point at it
-mv /training/kubev-cluster-kubeconfig /training/.secrets/kubev-cluster-kubeconfig
-
-# TODO or
-mkdir -p /root/.kube/
+# move the kubeconfig to `/root/.kube/config`
 mv /training/kubev-cluster-kubeconfig /root/.kube/config
-```
-
-```bash
-# move the kubeconfig created via kubeone into .secrets/, then export KUBECONFIG to point at it
-# TODO also in .trainingrc
-export KUBECONFIG=/training/.secrets/kubev-cluster-kubeconfig
 ```
 
 ```bash

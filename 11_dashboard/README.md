@@ -98,3 +98,26 @@ kubectl -n kubermatic-virtualization get svc kubev-dashboard -o jsonpath="{.spec
 <!-- TODO does not work no vms shown in ui -->
 
 The url of the dashboard is `http://<EXTERNAL-IP-OF-WORKER-NODE>:<NODEPORT-OF-DASHBOARD-SERVICE>`.
+
+<!-- 
+
+issue on kubeone apply
+
+ERRO[19:01:55 UTC] Apply failed                                  error="failed to probe cluster: runtime: running task on \"10.156.0.10\"\nssh: exec\nssh: popen\nProcess exited with status 1\nset -xeuo pipefail\nexport \"PATH=$PATH:/sbin:/usr/local/bin:/opt/bin\"\nfqdn=$(hostname -f)\n[ \"$fqdn\" = localhost ] && fqdn=$(hostname)\necho -n \"$fqdn\"\n\nstderr: + export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/local/bin:/opt/bin\n+ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/local/bin:/opt/bin\n++ hostname -f\nhostname: Temporary failure in name resolution\n+ fqdn=\n"
+Error: failed to probe cluster: runtime: running task on "10.156.0.10"
+ssh: exec
+ssh: popen
+Process exited with status 1
+set -xeuo pipefail
+export "PATH=$PATH:/sbin:/usr/local/bin:/opt/bin"
+fqdn=$(hostname -f)
+[ "$fqdn" = localhost ] && fqdn=$(hostname)
+echo -n "$fqdn"
+
+stderr: + export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/local/bin:/opt/bin
++ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/sbin:/usr/local/bin:/opt/bin
+++ hostname -f
+hostname: Temporary failure in name resolution
++ fqdn=
+
+ -->

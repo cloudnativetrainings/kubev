@@ -45,18 +45,3 @@ install -m 700 -o root -g root /training/kubermatic-virtualization /usr/local/bi
 # verify
 kubev version
 ```
-
-<!-- TODO -->
-<!-- kubelet version -->
-```
-│ Kubermatic Virtualization          v1.2.0                            │
-│ Kubernetes                         v1.34.7                           │
-│ KubeOVN CNI                        v1.15.16                          │
-│ Multus CNI                         v4.2.3                            │
-│ Kyverno                            3.5.3                             │
-│ Metal LB                           0.15.3                            │
-│ Cert Manager                       v1.18.5                           │
-│ Longhorn                           1.9.1                             │
-│ Kubevirt                           v1.6.5-1                          │
-│ Kubevirt CDI                       v1.64.0     
-```
